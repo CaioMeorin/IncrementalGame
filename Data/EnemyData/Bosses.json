@@ -1,0 +1,13 @@
+{
+    "Boss 1":
+        {"MaxHP":100,"CurrentHP":100,"STR":2,"INT":2,"DEX":0,"LUK":2,"WIS":2},
+    
+    "Boss 2":
+        {"MaxHP":100,"CurrentHP":100,"STR":3,"INT":3,"DEX":0,"LUK":3,"WIS":3},
+    
+    "BOSS 3":
+        {"MaxHP":100,"CurrentHP":100,"STR":3,"INT":4,"DEX":0,"LUK":2,"WIS":1},
+    
+    
+    "boss 4":
+        {"MaxHP":100,"CurrentHP":100,"STR":50,"INT":23,"DEX":0,"LUK":34,"WIS":2}}

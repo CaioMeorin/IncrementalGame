@@ -1,0 +1,176 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Data/Scenes/Systems/Battle.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.32549, 0.364706, 0.313726, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.223529, 0.180392, 0.180392, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.101961, 0.0941176, 0.0941176, 1 )
+border_blend = true
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.12549, 0.12549, 0.12549, 0.509804 )
+
+[node name="Battle" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -180.0
+margin_right = 320.0
+margin_bottom = 180.0
+script = ExtResource( 2 )
+
+[node name="enemyContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = 82.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="EnemyName" type="Label" parent="enemyContainer"]
+margin_right = 632.0
+margin_bottom = 14.0
+align = 1
+valign = 1
+
+[node name="healthBar" type="ProgressBar" parent="enemyContainer"]
+margin_top = 18.0
+margin_right = 632.0
+margin_bottom = 34.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 10.0
+
+[node name="enemyGraphics" type="TextureRect" parent="enemyContainer"]
+margin_top = 38.0
+margin_right = 632.0
+margin_bottom = 438.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = ExtResource( 1 )
+stretch_mode = 6
+
+[node name="playerPanel" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -95.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="playerData" type="VBoxContainer" parent="playerPanel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -94.0
+margin_right = -4.0
+margin_bottom = -2.0
+
+[node name="Player" type="Label" parent="playerPanel/playerData"]
+margin_right = 632.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Nome"
+align = 1
+valign = 1
+
+[node name="healthBar" type="ProgressBar" parent="playerPanel/playerData"]
+margin_top = 38.0
+margin_right = 632.0
+margin_bottom = 54.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 500.0
+value = 50.0
+
+[node name="playerActions" type="HBoxContainer" parent="playerPanel/playerData"]
+margin_top = 58.0
+margin_right = 632.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="attackButton" type="Button" parent="playerPanel/playerData/playerActions"]
+margin_right = 208.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 2
+text = "Attack"
+
+[node name="Button2" type="Button" parent="playerPanel/playerData/playerActions"]
+margin_left = 212.0
+margin_right = 420.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 2
+text = "Sei la"
+
+[node name="runButton" type="Button" parent="playerPanel/playerData/playerActions"]
+margin_left = 424.0
+margin_right = 632.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 2
+text = "Run"
+
+[node name="RunPanel" type="Panel" parent="playerPanel"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -47.5
+margin_right = 320.0
+margin_bottom = 47.5
+
+[node name="RunMessage" type="Label" parent="playerPanel/RunPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "The enemy's dexterity allowed it to grab your arm before you leave."
+align = 1
+valign = 1
+
+[node name="BattleTerminated" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -35.0
+margin_right = 100.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+window_title = "Battle terminated"
+dialog_text = "A LUTA TERMINOU"
+dialog_hide_on_ok = false
+
+[connection signal="pressed" from="playerPanel/playerData/playerActions/attackButton" to="." method="_on_attackButton_pressed"]
+[connection signal="pressed" from="playerPanel/playerData/playerActions/runButton" to="." method="_on_runButton_pressed"]
+[connection signal="gui_input" from="playerPanel/RunPanel" to="." method="_on_RunPanel_gui_input"]
+[connection signal="confirmed" from="BattleTerminated" to="." method="_on_ConfirmationDialog_confirmed"]
